@@ -1,6 +1,6 @@
 {
   "name": "bitsherpa-backpack",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "scripts": {
     "prepublish": "npm run build",
