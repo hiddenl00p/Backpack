@@ -33,7 +33,7 @@ export default class App extends React.Component {
         <FormGroup name="choose multiple"
         logic={
           {
-            action: 'hide',
+            action: 'show',
             field: 'mail',
             rule: {'ne': ['']}
           }

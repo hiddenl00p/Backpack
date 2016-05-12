@@ -2,6 +2,14 @@
 
 Open source TypeForm clone implemented in React and styled with Bootstrap 4.
 
+## Todo
+
+* Add keyboard navigation
+* onScroll add class to question in center
+* update progress bar when question answered
+* ignore start and end as question
+* add logic to question
+
 ## Installation
 
     npm install bitsherpa-backpack --save
