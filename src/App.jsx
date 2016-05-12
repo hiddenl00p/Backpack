@@ -16,39 +16,46 @@ export default class App extends React.Component {
   render() {
     return (
       <Form>
-        <FormGroup role="Start">
+        <FormGroup name="start">
           <h1>Welcome</h1>
           <p>Hello text</p>
           <Button keyboard="enter">Start</Button>
         </FormGroup>
-        <FormGroup>
+        <FormGroup name="mail">
           <Label>1. Mail</Label>
           <Description>Enter your mail</Description>
-          <Input name="mail" type="email" required="true">Please enter mail</Input>
+          <Input type="email" required="true">Please enter mail</Input>
         </FormGroup>
-        <FormGroup>
+        <FormGroup name="password">
           <Label>2. Password</Label>
-          <Input name="password" type="password" required="true">Please enter password</Input>
+          <Input type="password" required="true">Please enter password</Input>
         </FormGroup>
-        <FormGroup>
+        <FormGroup name="choose multiple"
+        logic={
+          {
+            action: 'hide',
+            field: 'mail',
+            rule: {'ne': ['']}
+          }
+        }>
           <Label>3. Choose multiple</Label>
-          <MultipleChoice name="choose multiple" multiple="true">
+          <MultipleChoice multiple="true">
             <Option keyboard="a">Option 1</Option>
             <Option keyboard="s">Option 2</Option>
             <Option keyboard="d">Option 3</Option>
             <Option keyboard="f">Option 4</Option>
           </MultipleChoice>
         </FormGroup>
-        <FormGroup>
+        <FormGroup name="choose one" >
           <Label>4. Choose one</Label>
-          <MultipleChoice name="choose one" required="true">
+          <MultipleChoice required="true">
             <Option keyboard="a">Option 1</Option>
             <Option keyboard="s">Option 2</Option>
             <Option keyboard="d">Option 3</Option>
             <Option keyboard="f">Option 4</Option>
           </MultipleChoice>
         </FormGroup>
-        <FormGroup role="End">
+        <FormGroup name="end">
           <h1>End</h1>
           <p>World text</p>
           <Button keyboard="enter" type="submit">Submit</Button>

@@ -14,6 +14,7 @@ export default class MultipleChoice extends React.Component {
     };
   }
 
+  // save option value
   update(value){
 
     var values =  this.state.values;
@@ -32,8 +33,6 @@ export default class MultipleChoice extends React.Component {
       values = [value];
     }
 
-    console.log("values: " + values)
-
     // update state
     this.setState({
       values: values
@@ -41,6 +40,8 @@ export default class MultipleChoice extends React.Component {
   }
 
   render() {
+
+    // render child prop options as buttons
     const children = React.Children.map(this.props.children, (child) => {
 
         var value = child.props.children;
@@ -59,11 +60,12 @@ export default class MultipleChoice extends React.Component {
           </GridColumn>
         );
       });
+
     return (
       <GridRow className="multiple-choice">
         <GridColumn className="col-sm-8">
         {children}
-        <Input required={this.props.required} value={this.state.values} className=""/>
+        <Input required={this.props.required} name={this.props.name} value={this.state.values} className=""/>
         { this.props.multiple ? (<Button keyboard="enter">OK</Button>) : "" }
         </GridColumn>
       </GridRow>

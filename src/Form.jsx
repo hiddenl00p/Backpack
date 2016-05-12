@@ -1,8 +1,7 @@
 import React from 'react';
 import GridRow from './GridRow.jsx';
 import Button from './Button.jsx';
-import {partsOfElementInViewport, elementInViewport, goToAnchor} from './functions.js';
-import _ from 'underscore';
+import {partsOfElementInViewport, elementInViewport, goToAnchor, forEach, elementInFocus} from './functions.js';
 
 export default class Form extends React.Component {
 
@@ -15,6 +14,7 @@ export default class Form extends React.Component {
     };
   }
 
+  // navbar actions
   navigate(action){
     if(action === "next"){
       var id = this.state.currentQuestion + 1
@@ -30,6 +30,7 @@ export default class Form extends React.Component {
     }
   }
 
+  // go to specific question
   goToQuestion(id){
     goToAnchor(id);
     this.setState({
@@ -37,17 +38,27 @@ export default class Form extends React.Component {
     });
   }
 
+  // store if question has been answered
+  answerQuestion(id, value){
+
+    // save to arry
+
+    // update progress
+  }
+
   render() {
 
     const progress = this.state.answeredQuestions.length
+
+    // add properties to question groups
     var questions = React.Children.map(this.props.children, (child) => {
 
       var id = this.props.children.indexOf(child)
-
       return React.cloneElement(child, {
         id: id,
         active: id === this.state.currentQuestion,
-        onClick: this.goToQuestion.bind(this, id)
+        onClick: this.goToQuestion.bind(this, id),
+        onInput: this.answerQuestion.bind(this, id)
       });
     });
 
@@ -79,9 +90,13 @@ export default class Form extends React.Component {
     );
   }
 
+  // add classes when scrolling
   handleScroll(){
     var elements = document.getElementsByClassName('form-group');
-    _.each(elements, (el) => {
+    forEach(elements, (index, el) => {
+
+      elementInFocus(el)
+
       if(partsOfElementInViewport(el)){
         el.classList.add("visible");
       }else{
@@ -100,15 +115,18 @@ export default class Form extends React.Component {
     console.log(this.state.currentQuestion)
   }
 
+  //
   componentDidMount() {
     var questions = React.Children.map(this.props.children, (child) => {
       return {
-        id: this.props.children.indexOf(child)
+        id: this.props.children.indexOf(child),
+        name: child.props.name
       }
     });
     this.setState({
       allQuestions: questions
     });
+    console.log(questions);
     document.addEventListener('scroll', this.handleScroll.bind(this));
   }
 }
